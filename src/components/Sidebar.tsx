@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { invoke } from '@tauri-apps/api/core';
+import { IconButton } from "@chakra-ui/react"
+import { PanelLeft } from "lucide-react";
 import {
     Box,
     Button,
@@ -30,9 +32,9 @@ import {
         <Drawer.Root placement={"start"} open={isOpen} size={"xs"} onOpenChange={(e) => setIsOpen(e.open)}>
             <Drawer.Backdrop />
             <Drawer.Trigger asChild>
-                <Button variant="outline" size="sm">
-                    Close
-                </Button>
+                <IconButton>
+                    <PanelLeft />
+                </IconButton>
             </Drawer.Trigger>
             <Drawer.Positioner>
                 <Drawer.Content>
