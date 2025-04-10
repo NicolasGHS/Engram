@@ -5,7 +5,7 @@ mod fs;
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_opener::init())
-        .invoke_handler(tauri::generate_handler![fs::files::get_files])
+        .invoke_handler(tauri::generate_handler![fs::files::get_files, fs::directories::get_folders])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

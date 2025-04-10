@@ -13,7 +13,18 @@ import {
 
   const Sidebar = () => {
     const [isOpen, setIsOpen] = useState(true);
+    const [notebooks, setNotebooks] = useState<string[]>([]);
 
+    async function getFolders() {
+        try {
+            const folders: string[] = await invoke('get_folders');
+            setNotebooks(folders);
+        } catch (error) {
+            console.error('Error reading directory:', error);
+        }
+    }
+
+    getFolders();
 
     return (
         <Drawer.Root placement={"start"} open={isOpen} size={"xs"} onOpenChange={(e) => setIsOpen(e.open)}>
@@ -31,6 +42,9 @@ import {
                 </Drawer.Header>
                 <Drawer.Body>
                     <p>Notebooks</p>
+                    {notebooks.map((notebook) => (
+                        <p>{notebook}</p>
+                    ))}
                 </Drawer.Body>
                 <Drawer.Footer />
                 </Drawer.Content>
