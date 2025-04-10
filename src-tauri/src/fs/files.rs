@@ -1,7 +1,19 @@
 use tauri::command;
 use home::home_dir;
 use walkdir::WalkDir;
+use std::path::Path;
 
+
+pub fn get_file_name(pathname: String) -> String {
+    let path = Path::new(&pathname);
+    
+
+    path.file_stem()
+        .and_then(|stem| stem.to_str())
+        .unwrap_or("")
+        .to_string()
+
+}
 
 #[command]
 pub fn read_dir() -> Vec<String> {
@@ -15,10 +27,13 @@ pub fn read_dir() -> Vec<String> {
             .filter_map(|file| file.ok()) 
         {
             if file.metadata().unwrap().is_file() {
-                files.push(file.path().display().to_string());
+                let file_name = get_file_name(file.path().display().to_string());
+                // files.push(file.path().display().to_string());
+                files.push(file_name);
             }
         }
     }
 
     files
 }
+
