@@ -12,11 +12,10 @@ pub fn get_file_name(pathname: String) -> String {
         .and_then(|stem| stem.to_str())
         .unwrap_or("")
         .to_string()
-
 }
 
 #[command]
-pub fn read_dir() -> Vec<String> {
+pub fn get_files() -> Vec<String> {
     let mut files = Vec::new();
 
     if let Some(home_path) = home_dir() {

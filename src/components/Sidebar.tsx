@@ -14,14 +14,6 @@ import {
   const Sidebar = () => {
     const [isOpen, setIsOpen] = useState(true);
 
-    async function getFiles() {
-        try {
-            const files: string[] = await invoke('read_dir');
-            console.log(files);
-        } catch (error) {
-            console.error('Error reading directory:', error);
-        }
-    }
 
     return (
         <Drawer.Root placement={"start"} open={isOpen} size={"xs"} onOpenChange={(e) => setIsOpen(e.open)}>
@@ -39,9 +31,6 @@ import {
                 </Drawer.Header>
                 <Drawer.Body>
                     <p>Notebooks</p>
-                    <Button onClick={getFiles}>
-                        Read files
-                    </Button>
                 </Drawer.Body>
                 <Drawer.Footer />
                 </Drawer.Content>

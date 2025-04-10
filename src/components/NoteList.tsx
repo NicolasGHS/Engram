@@ -11,7 +11,7 @@ const NoteList = () => {
 
     async function getFiles() {
         try {
-            const files: string[] = await invoke('read_dir');
+            const files: string[] = await invoke('get_files');
             setNotes(files);
         } catch (error) {
             console.error('Error reading directory:', error);
