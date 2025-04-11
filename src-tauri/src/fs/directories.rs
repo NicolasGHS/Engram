@@ -21,16 +21,18 @@ pub fn get_folders() -> Vec<String> {
     if let Some(home_path) = home_dir() {
         let target_dir = home_path.join("test_folder");
 
-        for folder in WalkDir::new(target_dir)
+        for folder in WalkDir::new(&target_dir)
             .into_iter()
             .filter_map(|folder| folder.ok()) 
         {
             if folder.metadata().unwrap().is_dir() {
-                let folder_name = get_folder_name(folder.path().display().to_string());
 
-                // folders.push(folder.path().display().to_string());
-                folders.push(folder_name);
+                let folder_path = folder.path();
 
+                if folder_path != target_dir {
+                    let folder_name = get_folder_name(folder.path().display().to_string());
+                    folders.push(folder_name);
+                }
             }
         }
     }

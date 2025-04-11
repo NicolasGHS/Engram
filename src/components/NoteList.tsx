@@ -2,10 +2,6 @@ import { useState, useEffect } from "react";
 import { invoke } from '@tauri-apps/api/core';
 
 
-type Note = {
-    name: string;
-}
-
 const NoteList = ({ selectedFolder }: { selectedFolder: string | null }) => {
     const [notes, setNotes] = useState<string[]>([]);
 
