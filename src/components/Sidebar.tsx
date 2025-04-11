@@ -46,11 +46,13 @@ import {
                 </Drawer.Header>
                 <Drawer.Body>
                     <p>Notebooks</p>
-                    {notebooks.map((notebook) => (
-                        <Button key={notebook} onClick={() => onSelectedFolder(notebook)}>
-                            {notebook}
-                        </Button>
-                    ))}
+                    <div className='flex flex-col'>
+                        {notebooks.map((notebook) => (
+                            <Button key={notebook} onClick={() => onSelectedFolder(notebook)}>
+                                {notebook}
+                            </Button>
+                        ))}
+                    </div>
                 </Drawer.Body>
                 <Drawer.Footer />
                 </Drawer.Content>
