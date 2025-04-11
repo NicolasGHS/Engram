@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { invoke } from '@tauri-apps/api/core';
 import { IconButton } from "@chakra-ui/react"
 import { PanelLeft } from "lucide-react";
@@ -13,7 +13,7 @@ import {
   } from '@chakra-ui/react'
 
 
-  const Sidebar = () => {
+  const Sidebar = ({ onSelectedFolder }: { onSelectedFolder: (folder: string) => void }) => {
     const [isOpen, setIsOpen] = useState(true);
     const [notebooks, setNotebooks] = useState<string[]>([]);
 
@@ -26,7 +26,9 @@ import {
         }
     }
 
-    getFolders();
+    useEffect(() => {
+        getFolders();
+    }, []);
 
     return (
         <Drawer.Root placement={"start"} open={isOpen} size={"xs"} onOpenChange={(e) => setIsOpen(e.open)}>
@@ -45,7 +47,9 @@ import {
                 <Drawer.Body>
                     <p>Notebooks</p>
                     {notebooks.map((notebook) => (
-                        <p>{notebook}</p>
+                        <Button key={notebook} onClick={() => onSelectedFolder(notebook)}>
+                            {notebook}
+                        </Button>
                     ))}
                 </Drawer.Body>
                 <Drawer.Footer />

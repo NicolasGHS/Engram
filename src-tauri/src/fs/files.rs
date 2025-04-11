@@ -15,11 +15,11 @@ pub fn get_file_name(pathname: String) -> String {
 }
 
 #[command]
-pub fn get_files() -> Vec<String> {
+pub fn get_files(selected_folder: String) -> Vec<String> {
     let mut files = Vec::new();
 
     if let Some(home_path) = home_dir() {
-        let target_dir = home_path.join("test_folder");
+        let target_dir = home_path.join("test_folder").join(selected_folder);
 
         for file in WalkDir::new(target_dir)
             .into_iter()
