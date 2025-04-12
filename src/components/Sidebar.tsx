@@ -13,7 +13,7 @@ import {
   } from '@chakra-ui/react'
 
 
-  const Sidebar = ({ onSelectedFolder }: { onSelectedFolder: (folder: string) => void }) => {
+  const Sidebar = ({ onSelectedFolder, selectedFolder }: { onSelectedFolder: (folder: string) => void; selectedFolder: string | null; }) => {
     const [isOpen, setIsOpen] = useState(true);
     const [notebooks, setNotebooks] = useState<string[]>([]);
 
@@ -29,6 +29,8 @@ import {
     useEffect(() => {
         getFolders();
     }, []);
+
+    console.log("selectedFolder: ", selectedFolder);
 
     return (
         <Drawer.Root placement={"start"} open={isOpen} size={"xs"} onOpenChange={(e) => setIsOpen(e.open)}>
@@ -48,7 +50,7 @@ import {
                     <p>Notebooks</p>
                     <div className='flex flex-col'>
                         {notebooks.map((notebook) => (
-                            <Button key={notebook} onClick={() => onSelectedFolder(notebook)}>
+                            <Button key={notebook} onClick={() => onSelectedFolder(notebook)} variant={notebook === selectedFolder ? "subtle" : "plain"}>
                                 {notebook}
                             </Button>
                         ))}

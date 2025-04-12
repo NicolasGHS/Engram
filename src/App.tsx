@@ -10,7 +10,7 @@ function App() {
 
   return (
     <div className="h-screen">
-      <Sidebar onSelectedFolder={(folder: string) => setSelectedFolder(folder)} />
+      <Sidebar onSelectedFolder={(folder: string) => setSelectedFolder(folder)} selectedFolder={selectedFolder} />
       <NoteList selectedFolder={selectedFolder} />
     </div>
   );
